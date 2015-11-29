@@ -62,6 +62,7 @@ opts.device          | `String`     | `'sda'`       | `device` is the device nam
 opts.sampleMs        | `String`     | `1000`        | `sampleMs` is the amount of time to take the measurement over
 
 **Note:** get system sector size in bytes: `sudo hdparm -I /dev/sda | grep Physical`
+
 **Note:** get system sector size in bytes: `cat /sys/block/sda/queue/physical_block_size`
 
 usageWrite(opts, cb)

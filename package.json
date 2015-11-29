@@ -1,6 +1,6 @@
 {
   "name": "disk-stat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Disk usage statistics",
   "main": "index.js",
   "scripts": {
