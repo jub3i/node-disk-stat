@@ -13,6 +13,8 @@ disk-stat
 
 **Note:** This repo can be found on npm here: [disk-stat](https://www.npmjs.com/package/disk-stat)
 
+**Note:** This repo can be found on github here: [node-disk-stat](https://github.com/jub3i/node-disk-stat)
+
 **Caveat:** Works by parsing `/proc/diskstats`, so will only work on nix OS.
 
 Install
@@ -25,9 +27,12 @@ npm install disk-stat
 Example
 -------
 
+Require the module:
 ```
 var diskStat = require('disk-stat');
+```
 
+```
 //by default returns usage per second in bytes on device `sda`
 diskStat.usageRead(function(bytesPerSecond) {
   console.log(bytesPerSecond);
@@ -141,6 +146,16 @@ Areas ripe for contribution:
 - cross compatability for windoze and darwin/osx
 - performance
 - bugs
+
+Other Stat Modules
+------------------
+
+- cpu-stat [npm](https://www.npmjs.com/package/cpu-stat) [git](https://github.com/jub3i/node-cpu-stat)
+- net-stat [npm](https://www.npmjs.com/package/net-stat) [git](https://github.com/jub3i/node-net-stat)
+- disk-stat [npm](https://www.npmjs.com/package/disk-stat) [git](https://github.com/jub3i/node-disk-stat)
+- mem-stat [npm](https://www.npmjs.com/package/mem-stat) [git](https://github.com/jub3i/node-mem-stat)
+
+**Note:** `net-stat`, `disk-stat`, `mem-stat` only work on nix platforms.
 
 License
 -------
