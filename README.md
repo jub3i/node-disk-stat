@@ -24,22 +24,23 @@ Install
 npm install disk-stat
 ```
 
-Example
--------
+Examples
+--------
 
 Require the module:
 ```
 var diskStat = require('disk-stat');
 ```
 
+By default `usageRead()` returns usage per second in bytes on device `sda`:
 ```
-//by default returns usage per second in bytes on device `sda`
 diskStat.usageRead(function(bytesPerSecond) {
   console.log(bytesPerSecond);
 });
+```
 
-//specify some options to customize return value
-//see below for more options
+Specify some `opts` for `usageRead()` to customize return value, see docs below for more options:
+```
 diskStat.usageRead({
     device: 'sda1',
     units: 'MiB',
@@ -47,20 +48,22 @@ diskStat.usageRead({
   function(mbPerSecond) {
     console.log(mbPerSecond);
 });
+```
 
-//get all fields available from `/proc/diskstats` formatted as an object.
+Get all fields available from `/proc/diskstats` formatted as an object:
+```
 var raw = diskStat.raw();
 console.log(raw);
 ```
 
-usageRead(opts, cb)
--------------------
+usageRead([opts,] cb)
+---------------------
 
 Async function which returns `data`, the disk usage for reads per second in `opts.units` on `opts.device` over `opts.sampleMs` assuming a sector size in bytes of `sectorSizeBytes`
 
 Option               | Type         | Default       | Explanation
 -------------------- | ------------ | ------------- | ------------
-opts                 | `Object`     | see below     | Options object, specify what you need the defaults will be filled in
+opts                 | `Object`     | see below     | Options object, specify what you need, the defaults will be filled in
 opts.units           | `String`     | `'bytes'`     | The units of the returned value, can be one of `bytes`, `KiB`, `MiB` or `GiB`
 opts.sectorSizeBytes | `Number`     | `512`         | The number of bytes in each sector on the `device`
 opts.device          | `String`     | `'sda'`       | `device` is the device name to measure, see `raw()` for a list of device names
@@ -71,14 +74,14 @@ cb                   | `Function`   | none          | Callback which has signatu
 
 **Note:** get system sector size in bytes: `cat /sys/block/sda/queue/physical_block_size`
 
-usageWrite(opts, cb)
---------------------
+usageWrite([opts,] cb)
+----------------------
 
-Async function which returns `data`, the disk usage for reads per second in `opts.units` on `opts.device` over `opts.sampleMs` assuming a sector size in bytes of `sectorSizeBytes`
+Async function which returns `data`, the disk usage for writes per second in `opts.units` on `opts.device` over `opts.sampleMs` assuming a sector size in bytes of `sectorSizeBytes`
 
 Option               | Type         | Default       | Explanation
 -------------------- | ------------ | ------------- | ------------
-opts                 | `Object`     | see below     | Options object, specify what you need the defaults will be filled in
+opts                 | `Object`     | see below     | Options object, specify what you need, the defaults will be filled in
 opts.units           | `String`     | `'bytes'`     | The units of the returned value, can be one of `bytes`, `KiB`, `MiB` or `GiB`
 opts.sectorSizeBytes | `Number`     | `512`         | The number of bytes in each sector on the `device`
 opts.device          | `String`     | `'sda'`       | `device` is the device name to measure, see `raw()` for a list of device names
@@ -93,6 +96,115 @@ raw()
 -----
 
 Returns an object representing the data in `/proc/diskstats`.
+
+```
+{
+  ram0:
+   { deviceNumber: '1',
+     deviceNumberMinor: '0',
+     readsCompleted: '0',
+     readsMerged: '0',
+     sectorsRead: '0',
+     msReading: '0',
+     writesCompleted: '0',
+     writesMerged: '0',
+     sectorsWritten: '0',
+     msWriting: '0',
+     iosPending: '0',
+     msIo: '0',
+     msWeightedIo: '0' },
+
+  ...
+
+  loop0:
+   { deviceNumber: '7',
+     deviceNumberMinor: '0',
+     readsCompleted: '0',
+     readsMerged: '0',
+     sectorsRead: '0',
+     msReading: '0',
+     writesCompleted: '0',
+     writesMerged: '0',
+     sectorsWritten: '0',
+     msWriting: '0',
+     iosPending: '0',
+     msIo: '0',
+     msWeightedIo: '0' },
+
+  ...
+
+  sda:
+   { deviceNumber: '8',
+     deviceNumberMinor: '0',
+     readsCompleted: '163027',
+     readsMerged: '15815',
+     sectorsRead: '12564320',
+     msReading: '1662800',
+     writesCompleted: '421527',
+     writesMerged: '525281',
+     sectorsWritten: '27001720',
+     msWriting: '8517992',
+     iosPending: '0',
+     msIo: '1962780',
+     msWeightedIo: '10180908' },
+  sda1:
+   { deviceNumber: '8',
+     deviceNumberMinor: '1',
+     readsCompleted: '114879',
+     readsMerged: '15186',
+     sectorsRead: '4628658',
+     msReading: '1397120',
+     writesCompleted: '390778',
+     writesMerged: '483151',
+     sectorsWritten: '25718648',
+     msWriting: '8096212',
+     iosPending: '0',
+     msIo: '1755812',
+     msWeightedIo: '9493500' },
+  sda2:
+   { deviceNumber: '8',
+     deviceNumberMinor: '2',
+     readsCompleted: '2',
+     readsMerged: '0',
+     sectorsRead: '4',
+     msReading: '36',
+     writesCompleted: '0',
+     writesMerged: '0',
+     sectorsWritten: '0',
+     msWriting: '0',
+     iosPending: '0',
+     msIo: '36',
+     msWeightedIo: '36' },
+  sda5:
+   { deviceNumber: '8',
+     deviceNumberMinor: '5',
+     readsCompleted: '237',
+     readsMerged: '193',
+     sectorsRead: '3440',
+     msReading: '736',
+     writesCompleted: '1329',
+     writesMerged: '4130',
+     sectorsWritten: '43680',
+     msWriting: '9672',
+     iosPending: '0',
+     msIo: '2704',
+     msWeightedIo: '10408' },
+  sda6:
+   { deviceNumber: '8',
+     deviceNumberMinor: '6',
+     readsCompleted: '47728',
+     readsMerged: '436',
+     sectorsRead: '7930770',
+     msReading: '264080',
+     writesCompleted: '22937',
+     writesMerged: '38000',
+     sectorsWritten: '1239392',
+     msWriting: '392228',
+     iosPending: '0',
+     msIo: '266864',
+     msWeightedIo: '656260' }
+}
+```
 
 ```
   /proc/diskstats
@@ -161,4 +273,3 @@ License
 -------
 
 MIT
-
