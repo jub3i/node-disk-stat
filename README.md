@@ -13,7 +13,7 @@ disk-stat
 
 **Note:** This repo can be found on npm here: [disk-stat](https://www.npmjs.com/package/disk-stat)
 
-**Caveat:** Works by parsing `/proc/diskstats` - so will only work on nix OS.
+**Caveat:** Works by parsing `/proc/diskstats`, so will only work on nix OS.
 
 Install
 -------
@@ -60,6 +60,7 @@ opts.units           | `String`     | `'bytes'`     | The units of the returned 
 opts.sectorSizeBytes | `Number`     | `512`         | The number of bytes in each sector on the `device`
 opts.device          | `String`     | `'sda'`       | `device` is the device name to measure, see `raw()` for a list of device names
 opts.sampleMs        | `String`     | `1000`        | `sampleMs` is the amount of time to take the measurement over
+cb                   | `Function`   | none          | Callback which has signature `cb(usagePerSecond)`
 
 **Note:** get system sector size in bytes: `sudo hdparm -I /dev/sda | grep Physical`
 
@@ -77,9 +78,11 @@ opts.units           | `String`     | `'bytes'`     | The units of the returned 
 opts.sectorSizeBytes | `Number`     | `512`         | The number of bytes in each sector on the `device`
 opts.device          | `String`     | `'sda'`       | `device` is the device name to measure, see `raw()` for a list of device names
 opts.sampleMs        | `String`     | `1000`        | `sampleMs` is the amount of time to take the measurement over
+cb                   | `Function`   | none          | Callback which has signature `cb(usagePerSecond)`
 
-**Note:** get system sector size in bytes: `sudo hdparm -I /dev/sda | grep Physical`
-**Note:** get system sector size in bytes: `cat /sys/block/sda/queue/physical_block_size`
+**Note:** get system sector size: `sudo hdparm -I /dev/sda | grep Physical`
+
+**Note:** get system sector size: `cat /sys/block/sda/queue/physical_block_size`
 
 raw()
 -----
@@ -135,7 +138,7 @@ Just send a PR, or create an issue if you are not sure.
 
 Areas ripe for contribution:
 - testing
-- cross compatability for windows and darwin/osx
+- cross compatability for windoze and darwin/osx
 - performance
 - bugs
 
