@@ -17,6 +17,8 @@ disk-stat
 
 **Caveat:** Works by parsing `/proc/diskstats`, so will only work on nix OS.
 
+**Note:** If you are interested in the amount of disk space used/free/etc check out [diskusage](https://www.npmjs.com/package/diskusage)
+
 Install
 -------
 
