@@ -1,7 +1,7 @@
 {
   "name": "disk-stat",
   "version": "1.0.4",
-  "description": "Disk usage statistics",
+  "description": "Disk read/write usage statistics",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "disk",
+    "stat",
     "usage",
     "stats",
     "statistics",
